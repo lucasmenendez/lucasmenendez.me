@@ -1,0 +1,204 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Lucas Menéndez | Personal Website</title>
+        <meta name="description" content="I am a full stack developer interested in data privacy and blockchain projects...">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+        <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+
+        <!--[if lt IE 9]>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+            <script>window.html5 || document.write('<script src="js/vendor/html5shiv.js"><\/script>')</script>
+        <![endif]-->
+
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,100;0,300;0,500;0,600;1,100;1,300;1,500;1,600;1,800&display=swap');
+
+            ::-webkit-scrollbar {
+                display: none;
+            }
+
+            * {
+                font-family: 'Kanit', sans-serif;
+                font-weight: 200;
+            }
+
+            b, strong {
+                font-weight: 500;
+            }
+
+            h1 {
+                font-weight: 600;
+            }
+
+            h2 {
+                font-weight: 600;
+                font-style: italic;
+            }
+
+            h3 {
+                font-weight: 600;
+                font-style: italic;
+            }
+
+            body {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 10% 5%;
+                max-width: 800px;
+                margin: 0 auto;
+                text-align: center;
+                background: #333;
+                color: white;
+            }
+
+            ul {
+                text-align: initial;
+            }
+
+            h1.name {
+                display: inline-block;
+            }
+
+            .columns {
+                font-size: 0;
+            }
+
+            .columns > * { 
+                font-size: initial;
+            }
+
+            .intro {
+                display: inline-block;
+                vertical-align: top;
+                width: 65%;
+                text-align: right;
+            }
+
+            .cv {
+                display: inline-block;
+                vertical-align: top;
+                width: 30%;
+                text-align: left;
+                margin: 0 0 2em 5%;
+            }
+
+            .cv a, .cv a:visited, .cv a:hover, .cv a:active {
+                color: inherit;
+                text-decoration: none;
+            }
+
+            .cv a:hover {
+                text-decoration: underline;
+            }
+
+            h3.title-repos {
+                margin-top: 3em;
+            }
+
+            ul.repos {
+                list-style: none;
+                max-height: 400px;
+                overflow-y: scroll; 
+                background: #555;
+                padding: 1em;
+                border-radius: 8px;
+            }
+
+            ul.repos li .title {
+                display: block;
+                color: white;
+                font-weight: 500;
+            }
+
+            ul.repos li .stars, 
+            ul.repos li .tags {
+                margin-right: 24px;
+                color: grey;
+            }
+
+            ul.repos li .description {
+                margin-top: 0;
+            }
+
+            @media (max-width: 600px) {
+                .intro, .cv {
+                    width: 100%;
+                    text-align: left;
+                }
+            }
+        </style>
+
+        <script type="module" src="js/github.js"></script>
+    </head>
+    <body>
+        <img height="192" src="img/logo.png"/>
+        <h1>Lucas Menéndez</h1>
+        <div class="columns">
+            <div class="intro">
+                <p>I am a <strong>full stack developer</strong> with more than 7 years of experience in the IT sector, interested in <strong>data privacy and blockchain projects</strong>. </p>
+                <p>I love developing <strong>Go and JavaScript</strong>, but I have also worked with many other languages, stacks and technologies.</p>
+                <p>Let's talk! 📩 <strong>hi<img height=14 src="img/arroba.svg" alt="@"/>lucasmenendez.me</strong></p>
+            </div>
+            <div class="cv">
+                <h3>My CV</h3>
+                <ul>
+                    <li><a href="cv/en_cv.pdf" target="_blank">🇬🇧 version</a></li>
+                    <li><a href="cv/es_cv.pdf" target="_blank">🇪🇸 version</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div>
+            <a href="https://github.com/lucasmenendez" target="_blank"><img src="https://img.shields.io/static/v1?label=→&message=Github&color=white&style=for-the-badge&logo=github"/></a>
+            <a href="https://medium.com/@lucasmenendez" target="_blank"><img src="https://img.shields.io/static/v1?label=→&message=Medium&color=yellow&style=for-the-badge&logo=medium"/></a>
+            <a href="https://www.bbvanexttechnologies.com/author/lucas-menendez-sanchez/" target="_blank"><img src="https://img.shields.io/static/v1?label=&message=Other publications&color=lightgrey&style=for-the-badge"/></a>
+            <a href="https://www.linkedin.com/in/lucasmenendez/" target="_blank"><img src="https://img.shields.io/static/v1?label=→&message=Linkedin&color=blue&style=for-the-badge&logo=linkedin"/></a>
+        </div>
+
+        <h3 class="title-repos">My Github projects</h3>
+        <ul class="repos"></ul>
+
+        <script>
+            function parseRepositories(repositories) {
+                return repositories.map(repo => ({
+                    name: repo.full_name,
+                    description: repo.description,
+                    url: repo.html_url,
+                    site: repo.homepage,
+                    topics: repo.topics,
+                    stars: repo.stargazers_count
+                }))
+                .filter(a => a.stars > 0)
+                .sort((a, b) => b.stars - a.stars);
+            }
+
+            async function fetchRepositories(username) {
+                const endpoint = `https://api.github.com/users/${ username }/repos`
+                const response = await fetch(endpoint);
+                return await response.json();
+            }
+
+            (async function() {
+                var personal = await fetchRepositories("lucasmenendez");
+                var org = await fetchRepositories("elementumjs");
+                var repositories = parseRepositories([ ...personal, ...org ]);
+                console.log(repositories)
+
+                var reposContainer = document.querySelector("ul.repos");
+                repositories.forEach(repo => {
+                    var repoItem = document.createElement("li");
+                    repoItem.innerHTML += `<a class="title" target="_blank" href="${repo.url}">${repo.name}</a>`;
+                    repoItem.innerHTML += `<span class="stars">⭐ ${repo.stars}</span>`;
+                    repoItem.innerHTML += `<span class="tags">🏷️ ${repo.topics.join(', ')}</span>`;
+                    repoItem.innerHTML += `<p class="description">${repo.description}</p>`;
+                    reposContainer.appendChild(repoItem);
+                });
+            })();
+        </script>
+    </body>
+</html>
