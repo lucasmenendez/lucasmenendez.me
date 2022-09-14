@@ -118,11 +118,13 @@
             ul.repos li .stars, 
             ul.repos li .tags {
                 margin-right: 24px;
-                color: grey;
+                color: white;
+                font-size: .8em
             }
 
             ul.repos li .description {
                 margin-top: 0;
+                color: white;
             }
 
             @media (max-width: 600px) {
@@ -187,7 +189,6 @@
                 var personal = await fetchRepositories("lucasmenendez");
                 var org = await fetchRepositories("elementumjs");
                 var repositories = parseRepositories([ ...personal, ...org ]);
-                console.log(repositories)
 
                 var reposContainer = document.querySelector("ul.repos");
                 repositories.forEach(repo => {
