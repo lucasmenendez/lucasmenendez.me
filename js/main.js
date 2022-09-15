@@ -1,5 +1,4 @@
 function parseRepositories(repositories) {
-    console.log(repositories)
     // Parse, filter and sort repositories
     return repositories.map(repo => ({
         title: repo.name,
@@ -41,8 +40,9 @@ function initPortfolio(repositories) {
         elem.classList.add("category");
 
         const items = byLanguage[language];
+        const icon = language.toLowerCase();
         elem.addEventListener("click", () => selectCategory(index, items));
-        elem.innerHTML = `<img class="icon" src="img/symbols/${language}.svg"/>
+        elem.innerHTML = `<img class="icon" src="img/symbols/${icon}.svg"/>
             <span class="label">${language} (${items.length})</span>`;
 
         root.appendChild(elem);
