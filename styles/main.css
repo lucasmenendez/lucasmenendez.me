@@ -23,9 +23,10 @@ h2, h3 {
 
 body {
   display: block;
-  width: 100%;
+  width: 90%;
   box-sizing: border-box;
-  padding: 10% 5%;
+  margin: 0 5%;
+  padding: 100px 0;
   max-width: 800px;
   margin: 0 auto;
   text-align: center;
