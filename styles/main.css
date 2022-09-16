@@ -72,12 +72,27 @@ body > * {
   text-align: left;
   margin: 0;
 }
-.social-links a, .social-links a:visited, .social-links a:hover, .social-links a:active {
-  color: inherit;
+.social-links ul {
+  list-style: none;
+  -webkit-padding-start: 16px;
+          padding-inline-start: 16px;
+}
+.social-links ul li a {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 16px;
+  color: white;
+}
+.social-links ul li a, .social-links ul li a:visited {
   text-decoration: none;
 }
-.social-links a:hover {
+.social-links ul li a:hover {
   text-decoration: underline;
+}
+.social-links ul li a img, .social-links ul li a .flag {
+  width: 20px;
+  text-align: center;
 }
 
 .portfolio .categories {

@@ -42,7 +42,7 @@ function initPortfolio(repositories) {
         const items = byLanguage[language];
         const icon = language.toLowerCase();
         elem.addEventListener("click", () => selectCategory(index, items));
-        elem.innerHTML = `<img class="icon" src="img/symbols/${icon}.svg"/>
+        elem.innerHTML = `<img class="icon" src="assets/icons/${icon}.svg"/>
             <span class="label">${language} (${items.length})</span>`;
 
         root.appendChild(elem);
